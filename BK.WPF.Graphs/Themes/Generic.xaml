@@ -1,0 +1,136 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:BK.WPF.Graphs.Components">
+
+    <SolidColorBrush Color="#FF3CC9FF" x:Key="NormalItemBrush"/>
+    <SolidColorBrush Color="#FF89DCFC" x:Key="MouseOverItemBrush"/>
+    <SolidColorBrush Color="#FFCEF1FF" x:Key="MouseDownItemBrush"/>
+    <SolidColorBrush Color="#FF27A6D6" x:Key="AxisBrush"/>
+    
+    <Color x:Key="NormalItemColor">#FF3CC9FF</Color>
+    <Color x:Key="MouseOverItemColor">#FF89DCFC</Color>
+    <Color x:Key="MouseDownItemColor">#FFCEF1FF</Color>
+
+    <Style TargetType="{x:Type local:NumericalAxis}" x:Key="VerticalNumericalAxis">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:NumericalAxis}">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid>
+                            <ItemsControl x:Name="PART_Scale"
+                                          ItemsSource="{TemplateBinding Scale}"
+                                          Margin="10,0,5,0">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="1"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}"
+                                                   Margin="0,0,0,-8"
+                                                   VerticalAlignment="Bottom"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                        <Rectangle Height="Auto" Width="2" Fill="{StaticResource AxisBrush}"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type local:CategorialAxis}" x:Key="HorizontalCategorialAxis">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CategorialAxis}">
+                    <StackPanel>
+                        <Rectangle Height="2" Width="Auto" Fill="{StaticResource AxisBrush}"/>
+                        <ItemsControl ItemsSource="{TemplateBinding Categories}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:Graph}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Graph}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Row="0" Grid.Column="2"
+                                    Margin="0,10,0,15"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="{TemplateBinding Title}"
+                                       FontSize="22"
+                                       FontWeight="Medium"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="{TemplateBinding Subtitle}"
+                                       FontSize="16"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="1" Grid.Column="0"
+                                    Margin="10,0,15,0"
+                                    VerticalAlignment="Center">
+                            <StackPanel.LayoutTransform>
+                                <RotateTransform Angle="-90"/>
+                            </StackPanel.LayoutTransform>
+                            <TextBlock Text="{TemplateBinding YAxisTitle}"
+                                       FontWeight="Medium"
+                                       FontSize="16"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="{TemplateBinding YAxisSubtitle}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="3" Grid.Column="2"
+                                     Margin="0,15,0,10"
+                                     HorizontalAlignment="Center">
+                            <TextBlock Text="{TemplateBinding XAxisTitle}"
+                                       FontWeight="Medium"
+                                       FontSize="16"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="{TemplateBinding XAxisSubtitle}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        
+                        <local:NumericalAxis x:Name="PART_VerticalAxis"
+                                             Grid.Row="1" Grid.Column="1"
+                                             Style="{StaticResource VerticalNumericalAxis}"/>
+                        <local:CategorialAxis x:Name="PART_HorizontalAxis"
+                                              Grid.Row="2" Grid.Column="2"
+                                              Margin="0,0,10,0"
+                                              Style="{StaticResource HorizontalCategorialAxis}"/>
+                        <Rectangle Grid.Row="2" Grid.Column="1"
+                                   Height="2" Width="2"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Right"
+                                   Fill="{StaticResource AxisBrush}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
