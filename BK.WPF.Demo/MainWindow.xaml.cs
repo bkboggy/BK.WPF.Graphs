@@ -11,7 +11,7 @@ namespace BK.WPF.Demo
         [Graphs.Attritubes.DataItemCategory]
         public string Name { get; set; }
         [Graphs.Attritubes.DataItemValue]
-        public int Value { get; set; }
+        public double Value { get; set; }
     }
 
     public partial class MainWindow : Window, INotifyPropertyChanged
@@ -38,13 +38,12 @@ namespace BK.WPF.Demo
         {
             Items = new ObservableCollection<Item>
             {
-                new Item { Name = "Item #1", Value = 20 },
-                new Item { Name = "Item #2", Value = 40 },
-                new Item { Name = "Item #3", Value = 65 },
-                new Item { Name = "Item #4", Value = 35 },
-                new Item { Name = "Item #5", Value = 82 },
+                new Item { Name = "Item #2", Value = 22 },
+                new Item { Name = "Item #3", Value = 53 },
+                new Item { Name = "Item #4", Value = 25 },
+                new Item { Name = "Item #5", Value = 12 },
                 new Item { Name = "Item #6", Value = 70 },
-                new Item { Name = "Item #7", Value = 40 },
+                new Item { Name = "Item #7", Value = 555 },
                 new Item { Name = "Item #8", Value = 12 },
                 new Item { Name = "Item #9", Value = 23 },
                 new Item { Name = "Item #10", Value = 67 },

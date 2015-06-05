@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using BK.WPF.Graphs.Utility;
 
 namespace BK.WPF.Graphs.Components
 {
@@ -10,10 +12,10 @@ namespace BK.WPF.Graphs.Components
             DependencyProperty.Register("MinValue", typeof (double), typeof (NumericalAxis));
 
         public static readonly DependencyProperty MaxValueProperty =
-            DependencyProperty.Register("MaxValue", typeof(double), typeof(NumericalAxis));
+            DependencyProperty.Register("MaxValue", typeof(double), typeof (NumericalAxis));
 
-        public static readonly DependencyProperty IncrementValueProperty =
-            DependencyProperty.Register("IncrementValue", typeof(double), typeof(NumericalAxis));
+        public static readonly DependencyProperty ScaleIntervalProperty =
+            DependencyProperty.Register("ScaleInterval", typeof(double), typeof(NumericalAxis));
 
         public static readonly DependencyProperty ScaleProperty =
             DependencyProperty.Register("Scale", typeof (IEnumerable<double>), typeof (NumericalAxis));
@@ -36,10 +38,10 @@ namespace BK.WPF.Graphs.Components
             set { SetValue(MaxValueProperty, value); }
         }
 
-        public double IncrementValue
+        public double ScaleInterval
         {
-            get { return (double) GetValue(IncrementValueProperty); }
-            set { SetValue(IncrementValueProperty, value); }
+            get { return (double) GetValue(ScaleIntervalProperty); }
+            set { SetValue(ScaleIntervalProperty, value); }
         }
 
         public IEnumerable<double> Scale
@@ -51,6 +53,17 @@ namespace BK.WPF.Graphs.Components
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            Loaded += NumericalAxis_Loaded;
+            SizeChanged += NumericalAxis_SizeChanged;
+        }
+
+        void NumericalAxis_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            CalculateScale();
+        }
+
+        void NumericalAxis_Loaded(object sender, RoutedEventArgs e)
+        {
             CalculateScale();
         }
 
@@ -66,14 +79,43 @@ namespace BK.WPF.Graphs.Components
             var size = 0.0;
             if (Name.Equals("PART_VerticalAxis"))
             {
-                size = scale.ActualHeight;
+                size = ActualHeight;
             }
             else if (Name.Equals("PART_HorizontalAxis"))
             {
-                size = scale.ActualWidth;
+                size = ActualWidth;
             }
 
-            SetValue(ScaleProperty, new double[] {8, 7, 6, 5, 4, 3, 2, 1, 0});
+            SetValue(MaxValueProperty, (double)MaxValue.RoundUp());
+
+            var interval = 1000000000;
+            var flagVal = 0;
+            while (flagVal == 0 && interval >= 10)
+            {
+                flagVal = (int)(MaxValue / interval);
+                if (interval >= 10)
+                {
+                    interval /= 10;
+                }
+            }
+
+            SetValue(ScaleIntervalProperty, (double)interval);
+
+            var maxScaleCount = (int)(size / 40);
+            var scaleCount = (MaxValue/interval);
+            while (scaleCount > maxScaleCount)
+            {
+                interval *= 2;
+                scaleCount = (MaxValue / interval);
+            }
+
+            var scaleValues = new List<double> { MaxValue };
+            for (var i = 1; i < scaleCount; i++)
+            {
+                scaleValues.Add((int)(MaxValue - i * interval));
+            }
+
+            SetValue(ScaleProperty, scaleValues);
         }
     }
 }

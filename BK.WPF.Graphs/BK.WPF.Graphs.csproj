@@ -56,6 +56,7 @@
     <Compile Include="Attritubes\DataItemAttribute.cs" />
     <Compile Include="Attritubes\DataItemCategoryAttribute.cs" />
     <Compile Include="Attritubes\DataItemCollectionAttribute.cs" />
+    <Compile Include="Attritubes\DataItemGroupNameAttribute.cs" />
     <Compile Include="Attritubes\DataItemValueAttribute.cs" />
     <Compile Include="Common\EnumToIntConverter.cs" />
     <Compile Include="Common\VisualTreeUtil.cs" />
@@ -79,6 +80,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Utility\GetBaseValue.cs" />
+    <Compile Include="Utility\RoundUp.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -89,9 +92,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utility\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

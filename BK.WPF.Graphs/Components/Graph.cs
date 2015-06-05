@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using BK.WPF.Graphs.Attritubes;
+using BK.WPF.Graphs.Utility;
 
 namespace BK.WPF.Graphs.Components
 {

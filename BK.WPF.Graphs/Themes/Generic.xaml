@@ -11,16 +11,23 @@
     <Color x:Key="NormalItemColor">#FF3CC9FF</Color>
     <Color x:Key="MouseOverItemColor">#FF89DCFC</Color>
     <Color x:Key="MouseDownItemColor">#FFCEF1FF</Color>
+    
+    <Style TargetType="{x:Type TextBlock}" x:Key="WrappedText">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="TrimmedText">
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+    </Style>
 
     <Style TargetType="{x:Type local:NumericalAxis}" x:Key="VerticalNumericalAxis">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:NumericalAxis}">
                     <StackPanel Orientation="Horizontal">
-                        <Grid>
+                        <Grid Margin="10,0,5,0">
                             <ItemsControl x:Name="PART_Scale"
-                                          ItemsSource="{TemplateBinding Scale}"
-                                          Margin="10,0,5,0">
+                                          ItemsSource="{TemplateBinding Scale}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <UniformGrid Columns="1"/>
@@ -29,11 +36,17 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding}"
-                                                   Margin="0,0,0,-8"
-                                                   VerticalAlignment="Bottom"/>
+                                                   Margin="0,-4,0,0"
+                                                   HorizontalAlignment="Right"
+                                                   VerticalAlignment="Top"
+                                                   Style="{StaticResource WrappedText}"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MinValue}" 
+                                       VerticalAlignment="Bottom" 
+                                       HorizontalAlignment="Right"
+                                       Margin="0,0,0,-8"/>
                         </Grid>
                         <Rectangle Height="Auto" Width="2" Fill="{StaticResource AxisBrush}"/>
                     </StackPanel>
@@ -55,6 +68,13 @@
                                     <UniformGrid Rows="1"/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" 
+                                               HorizontalAlignment="Center"
+                                               Style="{StaticResource WrappedText}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </StackPanel>
                 </ControlTemplate>
@@ -85,10 +105,12 @@
                             <TextBlock Text="{TemplateBinding Title}"
                                        FontSize="22"
                                        FontWeight="Medium"
-                                       HorizontalAlignment="Center"/>
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource WrappedText}"/>
                             <TextBlock Text="{TemplateBinding Subtitle}"
                                        FontSize="16"
-                                       HorizontalAlignment="Center"/>
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TrimmedText}"/>
                         </StackPanel>
                         
                         <StackPanel Grid.Row="1" Grid.Column="0"
@@ -100,9 +122,11 @@
                             <TextBlock Text="{TemplateBinding YAxisTitle}"
                                        FontWeight="Medium"
                                        FontSize="16"
-                                       HorizontalAlignment="Center"/>
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TrimmedText}"/>
                             <TextBlock Text="{TemplateBinding YAxisSubtitle}"
-                                       HorizontalAlignment="Center"/>
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TrimmedText}"/>
                         </StackPanel>
                         
                         <StackPanel Grid.Row="3" Grid.Column="2"
@@ -111,9 +135,11 @@
                             <TextBlock Text="{TemplateBinding XAxisTitle}"
                                        FontWeight="Medium"
                                        FontSize="16"
-                                       HorizontalAlignment="Center"/>
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TrimmedText}"/>
                             <TextBlock Text="{TemplateBinding XAxisSubtitle}"
-                                       HorizontalAlignment="Center"/>
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TrimmedText}"/>
                         </StackPanel>
                         
                         <local:NumericalAxis x:Name="PART_VerticalAxis"
