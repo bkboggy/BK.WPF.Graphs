@@ -114,7 +114,7 @@ namespace BK.WPF.Graphs.Components
 
             var categories = new List<string>();
             var minVal = 0.0;
-            var maxVal = 0.0;
+            var maxVal = 1.0;
 
             foreach (var element in Data)
             {

@@ -9,13 +9,16 @@ namespace BK.WPF.Graphs.Components
     public class NumericalAxis : Control
     {
         public static readonly DependencyProperty MinValueProperty =
-            DependencyProperty.Register("MinValue", typeof (double), typeof (NumericalAxis));
+            DependencyProperty.Register("MinValue", typeof (double), typeof (NumericalAxis),
+            new PropertyMetadata(0.0));
 
         public static readonly DependencyProperty MaxValueProperty =
-            DependencyProperty.Register("MaxValue", typeof(double), typeof (NumericalAxis));
+            DependencyProperty.Register("MaxValue", typeof(double), typeof (NumericalAxis),
+            new PropertyMetadata(1.0));
 
         public static readonly DependencyProperty ScaleIntervalProperty =
-            DependencyProperty.Register("ScaleInterval", typeof(double), typeof(NumericalAxis));
+            DependencyProperty.Register("ScaleInterval", typeof(double), typeof(NumericalAxis),
+            new PropertyMetadata(1.0));
 
         public static readonly DependencyProperty ScaleProperty =
             DependencyProperty.Register("Scale", typeof (IEnumerable<double>), typeof (NumericalAxis));

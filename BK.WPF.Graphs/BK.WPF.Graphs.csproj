@@ -66,7 +66,6 @@
     <Compile Include="Components\Graph.cs" />
     <Compile Include="Components\PlotArea.cs" />
     <Compile Include="Graphs\BarGraph.cs" />
-    <Compile Include="Graphs\BaseGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
