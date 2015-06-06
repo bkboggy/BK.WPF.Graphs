@@ -88,8 +88,6 @@ namespace BK.WPF.Graphs.Components
                 size = ActualWidth;
             }
 
-            SetValue(MaxValueProperty, (double)MaxValue.RoundUp());
-
             var interval = 1000000000;
             var flagVal = 0;
             while (flagVal == 0 && interval >= 10)

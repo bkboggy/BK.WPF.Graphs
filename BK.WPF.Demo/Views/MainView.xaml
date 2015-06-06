@@ -5,7 +5,7 @@
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:vm="clr-namespace:BK.WPF.Demo.ViewModels"
         Title="Demo" 
-        Height="500" Width="700">
+        Height="500" Width="800">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>

@@ -26,6 +26,21 @@ namespace BK.WPF.Graphs.Components
         }
 
         /// <summary>
+        /// Maximum value dependency property.  Used in calculation of the plot elements' heights.
+        /// </summary>
+        public static readonly DependencyProperty MaxValueProperty =
+            DependencyProperty.Register("MaxValue", typeof(double), typeof(PlotArea));
+
+        /// <summary>
+        /// Maximum value property.  Used in calculation of the plot elements' heights.
+        /// </summary>
+        public double MaxValue
+        {
+            get { return (double)GetValue(MaxValueProperty); }
+            set { SetValue(MaxValueProperty, value); }
+        }
+
+        /// <summary>
         /// Static constructor.
         /// </summary>
         static PlotArea()

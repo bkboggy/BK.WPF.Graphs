@@ -2,19 +2,26 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:components="clr-namespace:BK.WPF.Graphs.Components"
-    xmlns:graphs="clr-namespace:BK.WPF.Graphs.Graphs">
+    xmlns:graphs="clr-namespace:BK.WPF.Graphs.Graphs"
+    xmlns:util="clr-namespace:BK.WPF.Graphs.Utility">
+    
+    <!-- Converters -->
+    <util:SizeRelativeToParentConverter x:Key="SizeRelativeToParentConverter"/>
+  
+    <!-- Colors -->
+    <Color x:Key="NormalItemColor">#FF1BA8FF</Color>
+    <Color x:Key="MouseOverItemColor">#FF4CBBFF</Color>
+    <Color x:Key="MouseDownItemColor">#FF85D1FF</Color>
+    <Color x:Key="AxisBrushColor">#FF0070E4</Color>
+    <Color x:Key="LightTextColor">White</Color>
 
     <!-- Brushes -->
-    <SolidColorBrush Color="#FF3CC9FF" x:Key="NormalItemBrush"/>
-    <SolidColorBrush Color="#FF89DCFC" x:Key="MouseOverItemBrush"/>
-    <SolidColorBrush Color="#FFCEF1FF" x:Key="MouseDownItemBrush"/>
-    <SolidColorBrush Color="#FF196988" x:Key="AxisBrush"/>
-    
-    <!-- Colors -->
-    <Color x:Key="NormalItemColor">#FF3CC9FF</Color>
-    <Color x:Key="MouseOverItemColor">#FF89DCFC</Color>
-    <Color x:Key="MouseDownItemColor">#FFCEF1FF</Color>
-    
+    <SolidColorBrush Color="{StaticResource NormalItemColor}" x:Key="NormalItemBrush"/>
+    <SolidColorBrush Color="{StaticResource MouseOverItemColor}" x:Key="MouseOverItemBrush"/>
+    <SolidColorBrush Color="{StaticResource MouseDownItemColor}" x:Key="MouseDownItemBrush"/>
+    <SolidColorBrush Color="{StaticResource AxisBrushColor}" x:Key="AxisBrush"/>
+    <SolidColorBrush Color="{StaticResource LightTextColor}" x:Key="LightTextBrush"/>
+
     <!-- Text Block Styles -->
     <Style TargetType="{x:Type TextBlock}" x:Key="WrappedText">
         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -90,12 +97,60 @@
         </Setter>
     </Style>
     
+    <!-- Visual Feedback Panel -->
+    <Style TargetType="{x:Type Panel}" x:Key="VisualFeedbackControl">
+        <Setter Property="Background" Value="{StaticResource NormalItemBrush}"/>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Duration="0" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" To="{StaticResource MouseOverItemColor}"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Duration="0" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" To="{StaticResource NormalItemColor}"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseDown">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Duration="0" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" To="{StaticResource MouseDownItemColor}"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseUp">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Duration="0" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" To="{StaticResource MouseOverItemColor}"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+    
     <!-- Vertical Bar -->
     <ItemContainerTemplate x:Key="VerticalBar">
-        <Rectangle Height="{Binding Value}" 
-                   Width="Auto" Margin="2,0"
-                   VerticalAlignment="Bottom"
-                   Fill="{StaticResource NormalItemBrush}"/>
+        <Grid Margin="4,0" VerticalAlignment="Bottom"
+              Style="{StaticResource VisualFeedbackControl}">
+            <Grid.Height>
+                <MultiBinding Converter="{StaticResource SizeRelativeToParentConverter}"
+                              ConverterParameter="1">
+                    <Binding Path="Value"/>
+                    <Binding RelativeSource="{RelativeSource AncestorType=components:PlotArea}" Path="ActualHeight"/>
+                    <Binding RelativeSource="{RelativeSource AncestorType=components:PlotArea}" Path="MaxValue"/>
+                </MultiBinding>
+            </Grid.Height>
+            <StackPanel>
+                <TextBlock Text="{Binding Value}"
+                           Margin="0,5,0,0"
+                           Foreground="{StaticResource LightTextBrush}"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
     </ItemContainerTemplate>
     
     <!-- Plot Area -->
@@ -131,7 +186,7 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Row="0" Grid.Column="2"
-                                    Margin="0,10,0,15"
+                                    Margin="0,10,0,25"
                                     HorizontalAlignment="Center">
                             <TextBlock Text="{TemplateBinding Title}"
                                        FontSize="22"

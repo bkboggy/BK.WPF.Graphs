@@ -79,6 +79,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utility\GetBaseValue.cs" />
+    <Compile Include="Utility\SizeRelativeToParentConverter.cs" />
     <Compile Include="Utility\RoundUp.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

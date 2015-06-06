@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using BK.WPF.Graphs.Utility;
 
 namespace BK.WPF.Graphs.Components
 {
@@ -192,6 +193,8 @@ namespace BK.WPF.Graphs.Components
                 }
             }
 
+            maxVal = maxVal.RoundUp();
+
             // Get the X axis.
             var hAxis = Template.FindName("PART_XAxis", this);
             // Set the X axis dependencies, if not null.
@@ -226,6 +229,13 @@ namespace BK.WPF.Graphs.Components
             if (plotDataProp != null)
             {
                 plotDataProp.SetValue(plot, plotData);
+            }
+            // Get the plot area max value property.
+            var plotMaxValProp = plot.GetType().GetProperty("MaxValue");
+            // If not null, set the data property.
+            if (plotMaxValProp != null)
+            {
+                plotMaxValProp.SetValue(plot, maxVal);
             }
         }
 
