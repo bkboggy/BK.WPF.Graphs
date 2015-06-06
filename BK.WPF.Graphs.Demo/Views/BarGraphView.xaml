@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="BK.WPF.Graphs.Demo.Views.BarGraphView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:g="clr-namespace:BK.WPF.Graphs.Graphs;assembly=BK.WPF.Graphs"
+             xmlns:vm="clr-namespace:BK.WPF.Graphs.Demo.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="600">
+    <UserControl.DataContext>
+        <vm:BarGraphViewModel/>
+    </UserControl.DataContext>
+    <g:BarGraph Title="Graph Demo" Subtitle="Bar Graph"
+                XAxisTitle="Categories" XAxisSubtitle="Years"
+                YAxisTitle="Values" YAxisSubtitle="Approximate"
+                Data="{Binding Data}"/>
+</UserControl>

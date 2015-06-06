@@ -5,7 +5,9 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BK.WPF.Graphs", "BK.WPF.Graphs\BK.WPF.Graphs.csproj", "{2D6AD205-F14D-44A7-90DE-586FF4EE4473}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BK.WPF.Demo", "BK.WPF.Demo\BK.WPF.Demo.csproj", "{852CA10D-B951-466F-ABC7-2A317765DDE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BK.WPF.Graphs.Tests", "BK.WPF.Graphs.Tests\BK.WPF.Graphs.Tests.csproj", "{49A11DC7-68B4-475D-B478-390D46595403}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BK.WPF.Graphs.Demo", "BK.WPF.Graphs.Demo\BK.WPF.Graphs.Demo.csproj", "{F0D2903E-86EE-4DC0-A770-F219EECDEDA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,14 @@ Global
 		{2D6AD205-F14D-44A7-90DE-586FF4EE4473}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D6AD205-F14D-44A7-90DE-586FF4EE4473}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D6AD205-F14D-44A7-90DE-586FF4EE4473}.Release|Any CPU.Build.0 = Release|Any CPU
-		{852CA10D-B951-466F-ABC7-2A317765DDE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{852CA10D-B951-466F-ABC7-2A317765DDE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{852CA10D-B951-466F-ABC7-2A317765DDE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{852CA10D-B951-466F-ABC7-2A317765DDE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49A11DC7-68B4-475D-B478-390D46595403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A11DC7-68B4-475D-B478-390D46595403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A11DC7-68B4-475D-B478-390D46595403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A11DC7-68B4-475D-B478-390D46595403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0D2903E-86EE-4DC0-A770-F219EECDEDA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0D2903E-86EE-4DC0-A770-F219EECDEDA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0D2903E-86EE-4DC0-A770-F219EECDEDA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0D2903E-86EE-4DC0-A770-F219EECDEDA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

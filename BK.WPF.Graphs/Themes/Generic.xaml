@@ -134,7 +134,7 @@
     
     <!-- Vertical Bar -->
     <ItemContainerTemplate x:Key="VerticalBar">
-        <Grid Margin="4,0" VerticalAlignment="Bottom"
+        <Grid Margin="5,0,0,0" VerticalAlignment="Bottom"
               Style="{StaticResource VisualFeedbackControl}">
             <Grid.Height>
                 <MultiBinding Converter="{StaticResource SizeRelativeToParentConverter}"

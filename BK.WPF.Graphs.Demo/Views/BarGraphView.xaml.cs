@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace BK.WPF.Demo.Views
+namespace BK.WPF.Graphs.Demo.Views
 {
     /// <summary>
     /// Interaction logic for BarGraphView.xaml
