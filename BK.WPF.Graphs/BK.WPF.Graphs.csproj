@@ -58,12 +58,11 @@
     <Compile Include="Attritubes\DataItemCollectionAttribute.cs" />
     <Compile Include="Attritubes\DataItemGroupNameAttribute.cs" />
     <Compile Include="Attritubes\DataItemValueAttribute.cs" />
-    <Compile Include="Common\EnumToIntConverter.cs" />
-    <Compile Include="Common\VisualTreeUtil.cs" />
-    <Compile Include="Components\CategorialAxis.cs" />
+    <Compile Include="Components\CategoricalAxis.cs" />
     <Compile Include="Components\NumericalAxis.cs" />
-    <Compile Include="Components\DataItem.cs" />
-    <Compile Include="Components\Graph.cs" />
+    <Compile Include="Components\PlotDataItem.cs" />
+    <Compile Include="Components\PlotItem.cs" />
+    <Compile Include="Components\BaseGraph.cs" />
     <Compile Include="Components\PlotArea.cs" />
     <Compile Include="Graphs\BarGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -91,7 +90,9 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

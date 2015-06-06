@@ -4,15 +4,18 @@
     xmlns:components="clr-namespace:BK.WPF.Graphs.Components"
     xmlns:graphs="clr-namespace:BK.WPF.Graphs.Graphs">
 
+    <!-- Brushes -->
     <SolidColorBrush Color="#FF3CC9FF" x:Key="NormalItemBrush"/>
     <SolidColorBrush Color="#FF89DCFC" x:Key="MouseOverItemBrush"/>
     <SolidColorBrush Color="#FFCEF1FF" x:Key="MouseDownItemBrush"/>
-    <SolidColorBrush Color="#FF27A6D6" x:Key="AxisBrush"/>
+    <SolidColorBrush Color="#FF196988" x:Key="AxisBrush"/>
     
+    <!-- Colors -->
     <Color x:Key="NormalItemColor">#FF3CC9FF</Color>
     <Color x:Key="MouseOverItemColor">#FF89DCFC</Color>
     <Color x:Key="MouseDownItemColor">#FFCEF1FF</Color>
     
+    <!-- Text Block Styles -->
     <Style TargetType="{x:Type TextBlock}" x:Key="WrappedText">
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
@@ -21,6 +24,34 @@
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
     </Style>
 
+    <!-- Horizontal Items Panel Style-->
+    <ItemsPanelTemplate x:Key="HorizontalItemsPanel">
+        <UniformGrid Rows="1"/>
+    </ItemsPanelTemplate>
+
+    <!-- Vertical Items Panel Style-->
+    <ItemsPanelTemplate x:Key="VerticalItemsPanel">
+        <UniformGrid Columns="1"/>
+    </ItemsPanelTemplate>
+    
+    <!-- Horizontal Categorical Axis Item TEmplate -->
+    <ItemContainerTemplate x:Key="HorizontalCategoricalAxisItem">
+        <TextBlock Text="{Binding}" 
+                   Margin="2,0"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource WrappedText}"/>
+    </ItemContainerTemplate>
+    
+    <!-- Vertical Numerical Axis Item Template -->
+    <ItemContainerTemplate x:Key="VerticalNumericalAxisItem">
+        <TextBlock Text="{Binding}"
+                   Margin="0,-4,0,0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
+                   Style="{StaticResource WrappedText}"/>
+    </ItemContainerTemplate>
+
+    <!-- Vertical Numerical Axis -->
     <Style TargetType="{x:Type components:NumericalAxis}" x:Key="VerticalNumericalAxis">
         <Setter Property="Template">
             <Setter.Value>
@@ -28,22 +59,9 @@
                     <StackPanel Orientation="Horizontal">
                         <Grid Margin="10,0,5,0">
                             <ItemsControl x:Name="PART_Scale"
-                                          ItemsSource="{TemplateBinding Scale}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Columns="1"/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}"
-                                                   Margin="0,-4,0,0"
-                                                   HorizontalAlignment="Right"
-                                                   VerticalAlignment="Top"
-                                                   Style="{StaticResource WrappedText}"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                                          ItemsSource="{TemplateBinding Scale}"
+                                          ItemsPanel="{StaticResource VerticalItemsPanel}"
+                                          ItemTemplate="{StaticResource VerticalNumericalAxisItem}"/>
                             <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MinValue}" 
                                        VerticalAlignment="Bottom" 
                                        HorizontalAlignment="Right"
@@ -55,39 +73,51 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
-    <Style TargetType="{x:Type components:CategorialAxis}" x:Key="HorizontalCategorialAxis">
+    
+    <!-- Horizontal Categorical Axis -->
+    <Style TargetType="{x:Type components:CategoricalAxis}" x:Key="HorizontalCategoricalAxis">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type components:CategorialAxis}">
+                <ControlTemplate TargetType="{x:Type components:CategoricalAxis}">
                     <StackPanel>
                         <Rectangle Height="2" Width="Auto" Fill="{StaticResource AxisBrush}"/>
-                        <ItemsControl ItemsSource="{TemplateBinding Categories}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <UniformGrid Rows="1"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}" 
-                                               HorizontalAlignment="Center"
-                                               Style="{StaticResource WrappedText}"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                        <ItemsControl ItemsSource="{TemplateBinding Categories}"
+                                      ItemsPanel="{StaticResource HorizontalItemsPanel}"
+                                      ItemTemplate="{StaticResource HorizontalCategoricalAxisItem}"/>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
+    
+    <!-- Vertical Bar -->
+    <ItemContainerTemplate x:Key="VerticalBar">
+        <Rectangle Height="{Binding Value}" 
+                   Width="Auto" Margin="2,0"
+                   VerticalAlignment="Bottom"
+                   Fill="{StaticResource NormalItemBrush}"/>
+    </ItemContainerTemplate>
+    
+    <!-- Plot Area -->
+    <Style TargetType="{x:Type components:PlotArea}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type components:PlotArea}">
+                    <ItemsControl ItemsSource="{TemplateBinding Data}"
+                                  ItemsPanel="{StaticResource HorizontalItemsPanel}"
+                                  ItemTemplate="{StaticResource VerticalBar}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Bar Graph -->
     <Style TargetType="{x:Type graphs:BarGraph}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type components:Graph}">
-                    <Grid Background="{TemplateBinding Background}">
+                <ControlTemplate TargetType="{x:Type graphs:BarGraph}">
+                    <Grid Background="{TemplateBinding Background}"
+                          Margin="0,0,10,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
@@ -143,18 +173,22 @@
                                        Style="{StaticResource TrimmedText}"/>
                         </StackPanel>
                         
-                        <components:NumericalAxis x:Name="PART_VerticalAxis"
+                        <components:NumericalAxis x:Name="PART_YAxis"
                                              Grid.Row="1" Grid.Column="1"
                                              Style="{StaticResource VerticalNumericalAxis}"/>
-                        <components:CategorialAxis x:Name="PART_HorizontalAxis"
+                        
+                        <components:CategoricalAxis x:Name="PART_XAxis"
                                               Grid.Row="2" Grid.Column="2"
-                                              Margin="0,0,10,0"
-                                              Style="{StaticResource HorizontalCategorialAxis}"/>
+                                              Style="{StaticResource HorizontalCategoricalAxis}"/>
+                        
                         <Rectangle Grid.Row="2" Grid.Column="1"
                                    Height="2" Width="2"
                                    VerticalAlignment="Top"
                                    HorizontalAlignment="Right"
                                    Fill="{StaticResource AxisBrush}"/>
+                        
+                        <components:PlotArea x:Name="PART_PlotArea"
+                                             Grid.Row="1" Grid.Column="2"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

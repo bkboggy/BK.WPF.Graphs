@@ -3,8 +3,14 @@ using System.Windows;
 
 namespace BK.WPF.Graphs.Graphs
 {
-    public class BarGraph : Graph
+    /// <summary>
+    /// Bar Graph control.
+    /// </summary>
+    public class BarGraph : BaseGraph
     {
+        /// <summary>
+        /// Static constructor.
+        /// </summary>
         static BarGraph()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(BarGraph), 

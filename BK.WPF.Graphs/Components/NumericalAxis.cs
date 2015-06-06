@@ -1,8 +1,7 @@
-﻿using System;
+﻿using BK.WPF.Graphs.Utility;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using BK.WPF.Graphs.Utility;
 
 namespace BK.WPF.Graphs.Components
 {
