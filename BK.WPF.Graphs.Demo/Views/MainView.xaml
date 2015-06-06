@@ -9,20 +9,25 @@
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
+        
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Background="#FF8398AB">
+        <StackPanel Background="#FF2D89DE">
             <Button Content="Bar Graph"
-                    Width="100" Margin="10">
+                    Width="150" Margin="10,10,10,5"
+                    Style="{StaticResource FlatButton}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ei:CallMethodAction TargetObject="{Binding}" MethodName="ShowBarGraph"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
+            <Button Content="Grouped Bar Graph"
+                    Width="150" Margin="10,5"
+                    Style="{StaticResource FlatButton}"/>
         </StackPanel>
         <ContentPresenter Grid.Column="1" Margin="10"
                           Content="{Binding GraphView}"/>
