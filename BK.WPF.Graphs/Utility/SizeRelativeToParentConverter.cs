@@ -42,11 +42,11 @@ namespace BK.WPF.Graphs.Utility
         }
 
         /// <summary>
-        /// Not used.  Returns the original value at index 0.
+        /// Not implemented.  Not used.
         /// </summary>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
         {
-            return new [] { value };
+            throw new NotSupportedException();
         }
     }
 }

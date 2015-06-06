@@ -15,7 +15,7 @@ namespace BK.WPF.Graphs.Demo.Data
                 data.Add(new DataItem
                 {
                     Name = "Item " + (i+1),
-                    Value = rnd.Next(10, 100)
+                    Value = rnd.Next(1, 10)
                 });
             }
             return data;

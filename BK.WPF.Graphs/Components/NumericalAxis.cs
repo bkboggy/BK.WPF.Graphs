@@ -14,10 +14,6 @@ namespace BK.WPF.Graphs.Components
             DependencyProperty.Register("MaxValue", typeof(double), typeof (NumericalAxis),
             new PropertyMetadata(1.0));
 
-        public static readonly DependencyProperty ScaleIntervalProperty =
-            DependencyProperty.Register("ScaleInterval", typeof(double), typeof(NumericalAxis),
-            new PropertyMetadata(1.0));
-
         public static readonly DependencyProperty ScaleProperty =
             DependencyProperty.Register("Scale", typeof (IEnumerable<double>), typeof (NumericalAxis));
 
@@ -39,18 +35,16 @@ namespace BK.WPF.Graphs.Components
             set { SetValue(MaxValueProperty, value); }
         }
 
-        public double ScaleInterval
-        {
-            get { return (double) GetValue(ScaleIntervalProperty); }
-            set { SetValue(ScaleIntervalProperty, value); }
-        }
-
         public IEnumerable<double> Scale
         {
             get { return (IEnumerable<double>) GetValue(ScaleProperty); }
             set { SetValue(ScaleProperty, value); }
         }
 
+        /// <summary>
+        /// Overridden OnApplyTemplate method.  Adds event handlers
+        /// and initialization of components.
+        /// </summary>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -58,62 +52,100 @@ namespace BK.WPF.Graphs.Components
             SizeChanged += NumericalAxis_SizeChanged;
         }
 
-        void NumericalAxis_SizeChanged(object sender, SizeChangedEventArgs e)
+        /// <summary>
+        /// Loaded event handler.
+        /// </summary>
+        /// <param name="sender">Numerical Axis control instance.</param>
+        /// <param name="e">Event arguments.</param>
+        private void NumericalAxis_Loaded(object sender, RoutedEventArgs e)
         {
             CalculateScale();
         }
 
-        void NumericalAxis_Loaded(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// SizeChanged event handler.
+        /// </summary>
+        /// <param name="sender">Numerical Axis control instance.</param>
+        /// <param name="e">SizeChanged event arguments.</param>
+        private void NumericalAxis_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             CalculateScale();
         }
 
+        /// <summary>
+        /// Calculates the numerical scale.
+        /// </summary>
         private void CalculateScale()
         {
+            // Get the Scale part.
             var scale = Template.FindName("PART_Scale", this) as FrameworkElement;
 
+            // If scale is null, unable to proceed.
             if (scale == null)
             {
                 return;
             }
 
+            // Stores scale size.
             var size = 0.0;
-            if (Name.Equals("PART_VerticalAxis"))
+            // If this is a vertical scale, get the height.
+            if (Name.Equals("PART_YAxis"))
             {
                 size = ActualHeight;
             }
-            else if (Name.Equals("PART_HorizontalAxis"))
+            // However, if this is a horizontal scale, get the width.
+            else if (Name.Equals("PART_XAxis"))
             {
                 size = ActualWidth;
             }
 
-            var interval = 1000000000;
-            var flagVal = 0;
-            while (flagVal == 0 && interval >= 10)
+            // ---------------------- TEST AREA (START) ---------------------- //
+
+            var interval = 1;
+            while (interval < 1000000000)
             {
-                flagVal = (int)(MaxValue / interval);
-                if (interval >= 10)
+                var factor = MaxValue / interval;
+                if (factor <= 10)
                 {
-                    interval /= 10;
+                    break;
+                }
+                interval *= 10;
+            }
+
+            var scaleCount = (int)(MaxValue/interval);
+
+
+            if (scaleCount < 10 && scaleCount < size / 150 && interval != 1)
+            {
+                var tempInterval = interval / 10;
+                var tempScaleCount = (int)(MaxValue / tempInterval);
+                if (tempScaleCount > 10)
+                {
+                    interval /= 5;
+                }
+                else
+                {
+                    interval = tempInterval;
                 }
             }
-
-            SetValue(ScaleIntervalProperty, (double)interval);
-
-            var maxScaleCount = (int)(size / 40);
-            var scaleCount = (MaxValue/interval);
-            while (scaleCount > maxScaleCount)
+            else if (scaleCount > size / 10)
             {
-                interval *= 2;
-                scaleCount = (MaxValue / interval);
+                interval *= 5;
             }
 
+            scaleCount = (int)(MaxValue / interval);
+
+            // Stores scale values.
             var scaleValues = new List<double> { MaxValue };
+            // Calculate and store scale values.
             for (var i = 1; i < scaleCount; i++)
             {
                 scaleValues.Add((int)(MaxValue - i * interval));
             }
 
+            // ----------------------- TEST AREA (END) ----------------------- //
+
+            // Set the scale property.
             SetValue(ScaleProperty, scaleValues);
         }
     }
