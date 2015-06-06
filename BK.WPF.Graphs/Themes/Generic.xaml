@@ -7,13 +7,15 @@
     
     <!-- Converters -->
     <util:SizeRelativeToParentConverter x:Key="SizeRelativeToParentConverter"/>
+    <util:IsParentSizeSmallerThanChildConverter x:Key="IsParentSizeSmallerThanChildConverter"/>
   
     <!-- Colors -->
     <Color x:Key="NormalItemColor">#FF1BA8FF</Color>
-    <Color x:Key="MouseOverItemColor">#FF4CBBFF</Color>
-    <Color x:Key="MouseDownItemColor">#FF85D1FF</Color>
+    <Color x:Key="MouseOverItemColor">#FF6DC7FF</Color>
+    <Color x:Key="MouseDownItemColor">#FFA0DBFF</Color>
     <Color x:Key="AxisBrushColor">#FF0070E4</Color>
     <Color x:Key="LightTextColor">White</Color>
+    <Color x:Key="DarkTextColor">Black</Color>
 
     <!-- Brushes -->
     <SolidColorBrush Color="{StaticResource NormalItemColor}" x:Key="NormalItemBrush"/>
@@ -21,6 +23,7 @@
     <SolidColorBrush Color="{StaticResource MouseDownItemColor}" x:Key="MouseDownItemBrush"/>
     <SolidColorBrush Color="{StaticResource AxisBrushColor}" x:Key="AxisBrush"/>
     <SolidColorBrush Color="{StaticResource LightTextColor}" x:Key="LightTextBrush"/>
+    <SolidColorBrush Color="{StaticResource DarkTextColor}" x:Key="DarkTextBrush"/>
 
     <!-- Text Block Styles -->
     <Style TargetType="{x:Type TextBlock}" x:Key="WrappedText">
@@ -144,12 +147,31 @@
                     <Binding RelativeSource="{RelativeSource AncestorType=components:PlotArea}" Path="MaxValue"/>
                 </MultiBinding>
             </Grid.Height>
-            <StackPanel>
-                <TextBlock Text="{Binding Value}"
-                           Margin="0,5,0,0"
-                           Foreground="{StaticResource LightTextBrush}"
-                           HorizontalAlignment="Center"/>
-            </StackPanel>
+            <TextBlock x:Name="ValueText"
+                       Text="{Binding Value}"
+                       HorizontalAlignment="Center">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="0,5,0,0"/>
+                        <Setter Property="Foreground" Value="{StaticResource LightTextBrush}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="True">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </DataTrigger>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource IsParentSizeSmallerThanChildConverter}" ConverterParameter="10">
+                                        <Binding Path="FontSize" RelativeSource="{RelativeSource Self}"/>
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}"/>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <Setter Property="Margin" Value="0,-15,0,0"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
         </Grid>
     </ItemContainerTemplate>
     
