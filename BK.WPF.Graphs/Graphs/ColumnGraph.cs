@@ -52,7 +52,11 @@ namespace BK.WPF.Graphs.Graphs
 
             for (var i = 0; i < itemCount; i++)
             {
-                var item = PlotItems.ElementAt(i);
+                var item = PlotItems.ElementAt(i) as Column;
+                if (item == null)
+                {
+                    continue;
+                }
                 item.Height = item.Value*heightRatio;
                 item.Width = itemWidth;
                 Canvas.SetLeft(item, itemWidth * i);

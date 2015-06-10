@@ -142,7 +142,7 @@ namespace BK.WPF.Graphs.Graphs
         /// <summary>
         /// Plot items.
         /// </summary>
-        public IEnumerable<PlotItem> PlotItems { get; protected set; }
+        public IEnumerable<Control> PlotItems { get; protected set; }
 
         /// <summary>
         /// Item selected event registration.

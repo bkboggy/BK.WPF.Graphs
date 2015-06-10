@@ -53,12 +53,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attritubes\DataItemAttribute.cs" />
-    <Compile Include="Attritubes\DataItemCategoryAttribute.cs" />
-    <Compile Include="Attritubes\DataItemCollectionAttribute.cs" />
-    <Compile Include="Attritubes\DataItemGroupNameAttribute.cs" />
-    <Compile Include="Attritubes\DataItemValueAttribute.cs" />
-    <Compile Include="DataComponents\DataGroup.cs" />
     <Compile Include="DataComponents\DataItem.cs" />
     <Compile Include="EventArgs\ItemSelectedEventArgs.cs" />
     <Compile Include="Graphs\BarGraph.cs" />
@@ -70,7 +64,6 @@
     <Compile Include="VisualComponents\PlotGroupItem.cs" />
     <Compile Include="VisualComponents\Column.cs" />
     <Compile Include="VisualComponents\PlotItem.cs" />
-    <Compile Include="VisualComponents\PlotArea.cs" />
     <Compile Include="Graphs\ColumnGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
