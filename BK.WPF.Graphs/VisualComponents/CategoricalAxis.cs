@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace BK.WPF.Graphs.Components
+namespace BK.WPF.Graphs.VisualComponents
 {
     /// <summary>
     /// Categorical Axis control.

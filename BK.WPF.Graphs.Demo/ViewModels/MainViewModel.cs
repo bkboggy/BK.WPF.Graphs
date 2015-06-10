@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace BK.WPF.Graphs.Demo.ViewModels
 {
-    public class MainViewModel : NotifyPropertyChangedBase
+    public class MainViewModel : ObservableObject
     {
         private UserControl _graphView;
 
@@ -22,9 +22,9 @@ namespace BK.WPF.Graphs.Demo.ViewModels
             }
         }
 
-        public void ShowBarGraph()
+        public void ShowColumnGraph()
         {
-            GraphView = new BarGraphView();
+            GraphView = new ColumnGraphView();
         }
     }
 }

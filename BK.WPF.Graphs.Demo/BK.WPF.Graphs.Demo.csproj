@@ -58,10 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\BarGraphViewModel.cs" />
+    <Compile Include="ViewModels\ColumnGraphViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="Views\BarGraphView.xaml.cs">
-      <DependentUpon>BarGraphView.xaml</DependentUpon>
+    <Compile Include="Views\ColumnGraphView.xaml.cs">
+      <DependentUpon>ColumnGraphView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -70,9 +70,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\NotifyPropertyChangedBase.cs" />
+    <Compile Include="Common\ObservableObject.cs" />
     <Compile Include="Data\DataFactory.cs" />
-    <Page Include="Views\BarGraphView.xaml">
+    <Page Include="Views\ColumnGraphView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

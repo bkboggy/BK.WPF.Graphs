@@ -1,4 +1,4 @@
-﻿using BK.WPF.Graphs.Components;
+﻿using BK.WPF.Graphs.VisualComponents;
 using System.Windows;
 
 namespace BK.WPF.Graphs.Graphs
@@ -13,8 +13,8 @@ namespace BK.WPF.Graphs.Graphs
         /// </summary>
         static BarGraph()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(BarGraph), 
-                new FrameworkPropertyMetadata(typeof(BarGraph)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof (BarGraph),
+                new FrameworkPropertyMetadata(typeof (BarGraph)));
         }
     }
 }

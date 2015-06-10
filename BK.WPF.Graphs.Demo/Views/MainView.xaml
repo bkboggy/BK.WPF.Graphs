@@ -16,17 +16,17 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Background="#FF2D89DE">
-            <Button Content="Bar Graph"
-                    Width="150" Margin="10,10,10,5"
+            <Button Content="Column Graph"
+                    Width="180" Margin="10,10,10,5"
                     Style="{StaticResource FlatButton}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <ei:CallMethodAction TargetObject="{Binding}" MethodName="ShowBarGraph"/>
+                        <ei:CallMethodAction TargetObject="{Binding}" MethodName="ShowColumnGraph"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Content="Grouped Bar Graph"
-                    Width="150" Margin="10,5"
+            <Button Content="Multi-Series Column Graph"
+                    Width="180" Margin="10,5"
                     Style="{StaticResource FlatButton}"/>
         </StackPanel>
         <ContentPresenter Grid.Column="1" Margin="10"

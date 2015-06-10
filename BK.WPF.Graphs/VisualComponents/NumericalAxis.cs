@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace BK.WPF.Graphs.Components
+namespace BK.WPF.Graphs.VisualComponents
 {
     public class NumericalAxis : Control
     {
@@ -99,8 +99,6 @@ namespace BK.WPF.Graphs.Components
                 size = ActualWidth;
             }
 
-            // ---------------------- TEST AREA (START) ---------------------- //
-
             var interval = 1;
             while (interval < 1000000000)
             {
@@ -142,8 +140,6 @@ namespace BK.WPF.Graphs.Components
             {
                 scaleValues.Add((int)(MaxValue - i * interval));
             }
-
-            // ----------------------- TEST AREA (END) ----------------------- //
 
             // Set the scale property.
             SetValue(ScaleProperty, scaleValues);

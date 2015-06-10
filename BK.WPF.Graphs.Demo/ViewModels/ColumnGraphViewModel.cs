@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace BK.WPF.Graphs.Demo.ViewModels
 {
-    public class BarGraphViewModel : NotifyPropertyChangedBase
+    public class ColumnGraphViewModel : ObservableObject
     {
         private ObservableCollection<DataItem> _data;
 
@@ -23,7 +23,7 @@ namespace BK.WPF.Graphs.Demo.ViewModels
             }
         }
 
-        public BarGraphViewModel()
+        public ColumnGraphViewModel()
         {
             InitializeData();
         }
@@ -31,7 +31,7 @@ namespace BK.WPF.Graphs.Demo.ViewModels
         private void InitializeData()
         {
             var factory = new DataFactory();
-            Data = new ObservableCollection<DataItem>(factory.GenerateSampleData());
+            Data = new ObservableCollection<DataItem>(factory.GenerateSampleDataByYear());
         }
     }
 }

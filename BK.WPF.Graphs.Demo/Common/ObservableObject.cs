@@ -3,13 +3,15 @@ using System.Runtime.CompilerServices;
 
 namespace BK.WPF.Graphs.Demo.Common
 {
-    public class NotifyPropertyChangedBase : INotifyPropertyChanged
+    public abstract class ObservableObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged([CallerMemberName] string name = "")
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string name = "")
         {
-            if (PropertyChanged != null)
+            var handler = PropertyChanged;
+
+            if (handler != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }

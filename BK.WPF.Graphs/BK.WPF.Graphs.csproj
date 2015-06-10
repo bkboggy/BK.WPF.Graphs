@@ -58,13 +58,20 @@
     <Compile Include="Attritubes\DataItemCollectionAttribute.cs" />
     <Compile Include="Attritubes\DataItemGroupNameAttribute.cs" />
     <Compile Include="Attritubes\DataItemValueAttribute.cs" />
-    <Compile Include="Components\CategoricalAxis.cs" />
-    <Compile Include="Components\NumericalAxis.cs" />
-    <Compile Include="Components\PlotDataItem.cs" />
-    <Compile Include="Components\PlotItem.cs" />
-    <Compile Include="Components\BaseGraph.cs" />
-    <Compile Include="Components\PlotArea.cs" />
+    <Compile Include="DataComponents\DataGroup.cs" />
+    <Compile Include="DataComponents\DataItem.cs" />
+    <Compile Include="EventArgs\ItemSelectedEventArgs.cs" />
     <Compile Include="Graphs\BarGraph.cs" />
+    <Compile Include="Graphs\BaseGraph.cs" />
+    <Compile Include="Graphs\MultiSeriesBarGraph.cs" />
+    <Compile Include="Graphs\MultiSeriesColumnGraph.cs" />
+    <Compile Include="VisualComponents\CategoricalAxis.cs" />
+    <Compile Include="VisualComponents\NumericalAxis.cs" />
+    <Compile Include="VisualComponents\PlotGroupItem.cs" />
+    <Compile Include="VisualComponents\Column.cs" />
+    <Compile Include="VisualComponents\PlotItem.cs" />
+    <Compile Include="VisualComponents\PlotArea.cs" />
+    <Compile Include="Graphs\ColumnGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,9 +99,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

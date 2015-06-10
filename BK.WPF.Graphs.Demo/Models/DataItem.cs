@@ -1,13 +1,7 @@
-﻿using BK.WPF.Graphs.Attritubes;
-
-namespace BK.WPF.Graphs.Demo.Models
+﻿namespace BK.WPF.Graphs.Demo.Models
 {
-    [DataItem]
-    public class DataItem
+    public class DataItem : DataComponents.DataItem
     {
-        [DataItemCategory]
-        public string Name { get; set; }
-        [DataItemValue]
-        public int Value { get; set; }
+
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace BK.WPF.Graphs.Components
+﻿namespace BK.WPF.Graphs.DataComponents
 {
     /// <summary>
-    /// Data item used for plotting Plot Items.
+    /// Data item used for plotting an item.
     /// </summary>
-    public class PlotDataItem
+    public class DataItem
     {
         /// <summary>
         /// Category property.
