@@ -25,9 +25,15 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Content="Multi-Series Column Graph"
-                    Width="180" Margin="10,5"
-                    Style="{StaticResource FlatButton}"/>
+            <Button Content="Bar Graph"
+                    Width="180" Margin="10,10,10,5"
+                    Style="{StaticResource FlatButton}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:CallMethodAction TargetObject="{Binding}" MethodName="ShowBarGraph"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
         </StackPanel>
         <ContentPresenter Grid.Column="1" Margin="10"
                           Content="{Binding GraphView}"/>

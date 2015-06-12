@@ -179,83 +179,137 @@
         </Setter>
     </Style>
     
-   
-    <!-- Column Graph -->
-    <Style TargetType="{x:Type graphs:ColumnGraph}">
+    <!-- Bar -->
+    <Style TargetType="{x:Type visualComponents:Bar}">
+        <Setter Property="Margin" Value="0,5"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type graphs:ColumnGraph}">
-                    <!-- Main Layout Panel -->
-                    <Grid Background="{TemplateBinding Background}"
-                          Margin="{TemplateBinding Margin}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>                       
-                        <!-- Graph Title & Subtitle -->
-                        <StackPanel Grid.Row="0" Grid.Column="2"
-                                    Margin="0,0,0,25"
-                                    HorizontalAlignment="Center">
-                            <TextBlock Text="{TemplateBinding Title}"
-                                       FontSize="18"
-                                       FontWeight="Medium"
-                                       HorizontalAlignment="Center"
-                                       Style="{StaticResource WrappedText}"/>
-                            <TextBlock Text="{TemplateBinding Subtitle}"
-                                       FontSize="15"
-                                       HorizontalAlignment="Center"
-                                       Style="{StaticResource TrimmedText}"/>
-                        </StackPanel>                      
-                        <!-- Y Axis Title & Subtitle -->
-                        <StackPanel Grid.Row="1" Grid.Column="0"
-                                    Margin="0,0,15,0"
-                                    VerticalAlignment="Center">
-                            <StackPanel.LayoutTransform>
-                                <RotateTransform Angle="-90"/>
-                            </StackPanel.LayoutTransform>
-                            <TextBlock Text="{TemplateBinding YAxisTitle}"
-                                       FontWeight="Medium"
-                                       FontSize="16"
-                                       HorizontalAlignment="Center"
-                                       Style="{StaticResource TrimmedText}"/>
-                            <TextBlock Text="{TemplateBinding YAxisSubtitle}"
-                                       HorizontalAlignment="Center"
-                                       Style="{StaticResource TrimmedText}"/>
-                        </StackPanel>
-                        <!-- X Axis Title & Subtitle -->
-                        <StackPanel Grid.Row="3" Grid.Column="2"
-                                     Margin="0,15,0,0"
-                                     HorizontalAlignment="Center">
-                            <TextBlock Text="{TemplateBinding XAxisTitle}"
-                                       FontWeight="Medium"
-                                       FontSize="16"
-                                       HorizontalAlignment="Center"
-                                       Style="{StaticResource TrimmedText}"/>
-                            <TextBlock Text="{TemplateBinding XAxisSubtitle}"
-                                       HorizontalAlignment="Center"
-                                       Style="{StaticResource TrimmedText}"/>
-                        </StackPanel>                                     
-                        <!-- Y Axis -->
-                        <visualComponents:NumericalAxis x:Name="PART_YAxis" Grid.Row="1" Grid.Column="1"
-                                                        Style="{StaticResource VerticalNumericalAxis}"/>
-                        <!-- X Axis -->
-                        <visualComponents:CategoricalAxis x:Name="PART_XAxis" Grid.Row="2" Grid.Column="2"
-                                                          Style="{StaticResource HorizontalCategoricalAxis}"/>
-                        <!-- Plot -->
-                        <Border Grid.Row="1" Grid.Column="2" BorderBrush="{StaticResource AxisBrush}"
-                                BorderThickness="2,0,0,2">
-                            <Canvas x:Name="PART_PlotArea"/>
-                        </Border>
+                <ControlTemplate TargetType="{x:Type visualComponents:Bar}">
+                    <Grid Margin="{TemplateBinding Margin}"
+                          Style="{StaticResource VisualFeedbackControl}">
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value}"
+                                   HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="0,0,5,0"/>
+                                    <Setter Property="Foreground" Value="{StaticResource LightTextBrush}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="True">
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                        </DataTrigger>
+                                        <DataTrigger Value="True">
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource IsParentSizeSmallerThanChildConverter}" 
+                                                              ConverterParameter="10">
+                                                    <Binding Path="FontSize" RelativeSource="{RelativeSource Self}"/>
+                                                    <Binding Path="ActualWidth" 
+                                                             RelativeSource="{RelativeSource AncestorType={x:Type Grid}}"/>
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <Setter Property="Margin" Value="0, 0,-15,0"/>
+                                            <Setter Property="Foreground" Value="{StaticResource DarkTextBrush}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- Base Graph Template -->
+    <ControlTemplate TargetType="{x:Type graphs:BaseGraph}"
+                     x:Key="BaseGraphTemplate">
+        <!-- Main Layout Panel -->
+        <Grid Background="{TemplateBinding Background}"
+                          Margin="{TemplateBinding Margin}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!-- Graph Title & Subtitle -->
+            <StackPanel Grid.Row="0" Grid.Column="2"
+                                    Margin="0,0,0,25"
+                                    HorizontalAlignment="Center">
+                <TextBlock Text="{TemplateBinding Title}"
+                                       FontSize="18"
+                                       FontWeight="Medium"
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TrimmedText}"/>
+                <TextBlock Text="{TemplateBinding Subtitle}"
+                                       FontSize="15"
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TrimmedText}"/>
+            </StackPanel>
+            <!-- Y Axis Title & Subtitle -->
+            <StackPanel Grid.Row="1" Grid.Column="0"
+                                    Margin="0,0,15,0"
+                                    VerticalAlignment="Center">
+                <StackPanel.LayoutTransform>
+                    <RotateTransform Angle="-90"/>
+                </StackPanel.LayoutTransform>
+                <TextBlock Text="{TemplateBinding YAxisTitle}"
+                                       FontWeight="Medium"
+                                       FontSize="16"
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TrimmedText}"/>
+                <TextBlock Text="{TemplateBinding YAxisSubtitle}"
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TrimmedText}"/>
+            </StackPanel>
+            <!-- X Axis Title & Subtitle -->
+            <StackPanel Grid.Row="3" Grid.Column="2"
+                                     Margin="0,15,0,0"
+                                     HorizontalAlignment="Center">
+                <TextBlock Text="{TemplateBinding XAxisTitle}"
+                                       FontWeight="Medium"
+                                       FontSize="16"
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TrimmedText}"/>
+                <TextBlock Text="{TemplateBinding XAxisSubtitle}"
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TrimmedText}"/>
+            </StackPanel>
+            <!-- Y Axis -->
+            <visualComponents:NumericalAxis x:Name="PART_YAxis" Grid.Row="1" Grid.Column="1"
+                                                        Style="{StaticResource VerticalNumericalAxis}"/>
+            <!-- X Axis -->
+            <visualComponents:CategoricalAxis x:Name="PART_XAxis" Grid.Row="2" Grid.Column="2"
+                                                          Style="{StaticResource HorizontalCategoricalAxis}"/>
+            <!-- Plot -->
+            <Border Grid.Row="1" Grid.Column="2" BorderBrush="{StaticResource AxisBrush}"
+                                BorderThickness="2,0,0,2">
+                <Canvas x:Name="PART_PlotArea"/>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+
+    <!-- Column Graph -->
+    <Style TargetType="{x:Type graphs:ColumnGraph}">
+        <Setter Property="Template" Value="{StaticResource BaseGraphTemplate}"/>
+    </Style>
+
+    <!-- Bar Graph -->
+    <Style TargetType="{x:Type graphs:BarGraph}">
+        <Setter Property="Template" Value="{StaticResource BaseGraphTemplate}"/>
+    </Style>
+
+    <!-- Multi-Series Column Graph -->
+    <Style TargetType="{x:Type graphs:MultiSeriesColumnGraph}">
+        <Setter Property="Template" Value="{StaticResource BaseGraphTemplate}"/>
+    </Style>
+
+    <!-- Multi-Series Column Graph -->
+    <Style TargetType="{x:Type graphs:MultiSeriesBarGraph}">
+        <Setter Property="Template" Value="{StaticResource BaseGraphTemplate}"/>
     </Style>
 </ResourceDictionary>

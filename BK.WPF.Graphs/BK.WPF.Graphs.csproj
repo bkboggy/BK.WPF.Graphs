@@ -60,6 +60,8 @@
     <Compile Include="Graphs\MultiSeriesBarGraph.cs" />
     <Compile Include="Graphs\MultiSeriesColumnGraph.cs" />
     <Compile Include="VisualComponents\CategoricalAxis.cs" />
+    <Compile Include="VisualComponents\Bar.cs" />
+    <Compile Include="VisualComponents\ColumnSeries.cs" />
     <Compile Include="VisualComponents\NumericalAxis.cs" />
     <Compile Include="VisualComponents\PlotGroupItem.cs" />
     <Compile Include="VisualComponents\Column.cs" />

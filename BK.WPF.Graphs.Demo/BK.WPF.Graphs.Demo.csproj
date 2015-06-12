@@ -58,8 +58,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\BarGraphViewModel.cs" />
     <Compile Include="ViewModels\ColumnGraphViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\BarGraphView.xaml.cs">
+      <DependentUpon>BarGraphView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ColumnGraphView.xaml.cs">
       <DependentUpon>ColumnGraphView.xaml</DependentUpon>
     </Compile>
@@ -72,6 +76,10 @@
     </Compile>
     <Compile Include="Common\ObservableObject.cs" />
     <Compile Include="Data\DataFactory.cs" />
+    <Page Include="Views\BarGraphView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ColumnGraphView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

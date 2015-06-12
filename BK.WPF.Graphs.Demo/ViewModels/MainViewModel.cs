@@ -26,5 +26,10 @@ namespace BK.WPF.Graphs.Demo.ViewModels
         {
             GraphView = new ColumnGraphView();
         }
+
+        public void ShowBarGraph()
+        {
+            GraphView = new BarGraphView();
+        }
     }
 }
